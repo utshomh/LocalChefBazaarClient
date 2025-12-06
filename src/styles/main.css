@@ -10,11 +10,11 @@
   name: localchefbazaar;
   default: true;
 
-  --color-primary: #3cbf8a;
+  --color-primary: #43c7b5;
   --color-primary-content: #ffffff;
 
-  --color-secondary: #1e6f5c;
-  --color-secondary-content: #e6fff7;
+  --color-secondary: #0f4f58;
+  --color-secondary-content: #e5fcff;
 
   --color-accent: #f9c846;
   --color-accent-content: #1f1f1f;
@@ -39,8 +39,14 @@
   --color-error: #ff6b6b;
   --color-error-content: #ffffff;
 
-  /* --depth: 0;
-  --noise: 1; */
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
 
 body {
