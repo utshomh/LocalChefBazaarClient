@@ -1,12 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 
+// Routes
+import PrivateRoute from "./PrivateRoute";
 // Layouts
 import DefaultLayout from "../layouts/DefaultLayout";
 import RootLayout from "../layouts/RootLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
 // Pages
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import ProfilePage from "../pages/ProfilePage";
 // Common
 import ErrorPage from "../pages/ErrorPage";
 
@@ -23,6 +27,18 @@ const router = createBrowserRouter([
           { path: "", element: <HomePage /> },
           { path: "login", element: <LoginPage /> },
           { path: "register", element: <RegisterPage /> },
+        ],
+      },
+      {
+        path: "dashboard/",
+        element: (
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        ),
+        children: [
+          { path: "", element: <ProfilePage /> },
+          { path: "profile", element: <ProfilePage /> },
         ],
       },
     ],

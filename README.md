@@ -8,6 +8,8 @@ LocalChefBazaar is a modern online platform designed to connect home cooks with 
 
 This repository contains the **web application**, built with **React.js**, **Firebase Auth**, and **Tailwindcss**, providing the ui and functionality for the platform.
 
+---
+
 ## 🍽️ What LocalChefBazaar Offers
 
 - Browse daily menus from local home cooks  
@@ -17,6 +19,8 @@ This repository contains the **web application**, built with **React.js**, **Fir
 - Ratings and reviews  
 - Role-based access (Admin, Chef, Customer)  
 - Easy onboarding for home cooks to earn from their kitchens  
+
+---
 
 ## 🧰 Tech Stack
 
@@ -29,6 +33,9 @@ This repository contains the **web application**, built with **React.js**, **Fir
 - **SweetAlert2** — Beautiful, customizable pop-up alerts and confirmation dialogs  
 - **Axios** — HTTP client for API calls, fetching data, and handling requests  
 - **React Lottie** — Animation support using Lottie JSON files for smooth, lightweight animations  
+- **Tanstack Query** — Data fetching
+
+---
 
 ## 🚀 Installation & Setup
 

@@ -90,8 +90,11 @@ const Navbar = () => {
             </button>
             <ul
               tabIndex="1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-2 shadow-md"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-2 shadow-md gap-2"
             >
+              <Link to="/dashboard/profile" className="btn btn-sm btn-accent">
+                Profile
+              </Link>
               <button className="btn btn-sm btn-accent" onClick={handleLogout}>
                 Logout
               </button>
