@@ -5,6 +5,8 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import RootLayout from "../layouts/RootLayout";
 // Pages
 import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 // Common
 import ErrorPage from "../pages/ErrorPage";
 
@@ -17,7 +19,11 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <RootLayout />,
-        children: [{ path: "", element: <HomePage /> }],
+        children: [
+          { path: "", element: <HomePage /> },
+          { path: "login", element: <LoginPage /> },
+          { path: "register", element: <RegisterPage /> },
+        ],
       },
     ],
   },

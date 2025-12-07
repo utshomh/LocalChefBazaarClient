@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router";
 import { MdMenu } from "react-icons/md";
 
+import useAuth from "../../hooks/useAuth";
+import alert from "../../utils/alert";
 import Logo from "../shared/Logo";
 
 const privateLinks = [
@@ -15,7 +17,7 @@ const publicLinks = [
 ];
 
 const Navbar = () => {
-  const user = null;
+  const { user, logoutUser } = useAuth();
 
   const navLinks = (user ? privateLinks : publicLinks).map((link, index) => (
     <li key={index}>
@@ -32,6 +34,24 @@ const Navbar = () => {
     </li>
   ));
 
+  const handleLogout = async () => {
+    await alert.confirm(
+      "Are you sure?",
+      "You won't be able to access some feature while logged out",
+      async () => {
+        try {
+          await logoutUser();
+          alert.success("Logged In!", "You’ve signed in successfully.");
+        } catch (error) {
+          alert.error(
+            "Oops!",
+            error.message || "Something went wrong! Please try again."
+          );
+        }
+      }
+    );
+  };
+
   return (
     <div className="navbar px-4">
       <div className="navbar-start gap-1">
@@ -39,7 +59,7 @@ const Navbar = () => {
           <div
             tabIndex="0"
             role="button"
-            className="btn btn-ghost p-2 lg:hidden"
+            className="btn btn-ghost p-2 md:hidden"
           >
             <MdMenu className="text-2xl" />
           </div>
@@ -53,7 +73,7 @@ const Navbar = () => {
 
         <Logo />
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1 gap-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
@@ -65,14 +85,16 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar border-3 border-transparent hover:border-accent transition-colors duration-500 ease-in-out"
             >
               <div className="w-10 rounded-full">
-                <img src={user.image} />
+                <img src={user.photoURL} />
               </div>
             </button>
             <ul
               tabIndex="1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-2 shadow-md"
             >
-              <button className="btn btn-accent">Logout</button>
+              <button className="btn btn-sm btn-accent" onClick={handleLogout}>
+                Logout
+              </button>
             </ul>
           </div>
         ) : (
