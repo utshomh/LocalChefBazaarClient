@@ -1,18 +1,12 @@
 import { Link } from "react-router";
-import {
-  FaTwitter,
-  FaFacebookF,
-  FaGithub,
-  FaPhone,
-  FaMarker,
-} from "react-icons/fa6";
+import { FaTwitter, FaFacebookF, FaGithub, FaPhone } from "react-icons/fa6";
+import { FaMailBulk, FaMapMarker } from "react-icons/fa";
 
 import Logo from "../shared/Logo";
-import { FaMailBulk } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10 items-start flex-wrap rounded-box">
+    <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10 items-start flex-wrap rounded-t-box">
       <aside className="self-center flex flex-col items-end gap-1">
         <Logo />
         <p className="text-end">
@@ -22,8 +16,8 @@ const Footer = () => {
         </p>
       </aside>
 
-      <div className="space-y-2">
-        <h6 className="footer-title">Contact</h6>
+      <div className="gap-2">
+        <h6 className="font-bold text-lg">Contact</h6>
         <p className="flex flex-col gap-1">
           <span className="flex items-center gap-1">
             <FaPhone /> +880 1234-567890
@@ -32,13 +26,13 @@ const Footer = () => {
             <FaMailBulk /> support@localchefbazaar.com
           </span>
           <span className="flex items-center gap-1">
-            <FaMarker /> Tejgaon, Bangladesh
+            <FaMapMarker /> Tejgaon, Bangladesh
           </span>
         </p>
       </div>
 
-      <div className="space-y-2">
-        <h6 className="footer-title">Working Hours</h6>
+      <div className="gap-2">
+        <h6 className="font-bold text-lg">Working Hours</h6>
         <p className="flex flex-col gap-1">
           <span>Sun – Thu: 9:00 AM – 10:00 PM</span>
           <span>Fri: Closed</span>
@@ -46,17 +40,17 @@ const Footer = () => {
         </p>
       </div>
 
-      <nav className="space-y-2">
-        <h6 className="footer-title">Social Links</h6>
+      <nav className="gap-2">
+        <h6 className="font-bold text-lg">Social Links</h6>
         <div className="flex items-center gap-4">
           <Link to="#">
-            <FaTwitter className="text-xl hover:text-accent transition-colors" />
+            <FaTwitter className="text-xl hover:text-primary transition-colors" />
           </Link>
           <Link to="#">
-            <FaFacebookF className="text-xl hover:text-accent transition-colors" />
+            <FaFacebookF className="text-xl hover:text-primary transition-colors" />
           </Link>
           <Link to="#">
-            <FaGithub className="text-xl hover:text-accent transition-colors" />
+            <FaGithub className="text-xl hover:text-primary transition-colors" />
           </Link>
         </div>
       </nav>

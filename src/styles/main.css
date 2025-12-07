@@ -10,21 +10,21 @@
   name: localchefbazaar;
   default: true;
 
-  --color-primary: #43c7b5;
+  --color-primary: #3a8467;
   --color-primary-content: #ffffff;
 
-  --color-secondary: #0f4f58;
-  --color-secondary-content: #e5fcff;
+  --color-secondary: #6f7c45;
+  --color-secondary-content: #ffffff;
 
-  --color-accent: #f9c846;
+  --color-accent: #a6a77a;
   --color-accent-content: #1f1f1f;
 
   --color-neutral: #2a2a2a;
   --color-neutral-content: #f5f5f5;
 
-  --color-base-100: #ffffff;
-  --color-base-200: #f5f7f4;
-  --color-base-300: #e9ece6;
+  --color-base-100: #f3f4ec;
+  --color-base-200: #e5e6da;
+  --color-base-300: #d9dacb;
   --color-base-content: #111111;
 
   --color-info: #4da7ff;

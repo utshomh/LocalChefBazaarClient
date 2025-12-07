@@ -15,19 +15,16 @@ const publicLinks = [
 ];
 
 const Navbar = () => {
-  const user = {
-    image:
-      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-  };
+  const user = null;
 
   const navLinks = (user ? privateLinks : publicLinks).map((link, index) => (
     <li key={index}>
       <NavLink
         to={link.path}
         className={({ isActive }) =>
-          `px-4 ${
-            isActive ? "bg-accent font-bold" : "font-semibold"
-          } rounded-full`
+          `px-4 font-semibold ${
+            isActive ? "bg-accent/70" : "bg-inherit"
+          } rounded-full hover:bg-accent/50`
         }
       >
         {link.label}
@@ -36,7 +33,7 @@ const Navbar = () => {
   ));
 
   return (
-    <div className="navbar bg-base-100 shadow-sm rounded-box">
+    <div className="navbar px-4">
       <div className="navbar-start gap-1">
         <div className="dropdown">
           <div
@@ -48,7 +45,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="0"
-            className="menu gap-1 dropdown-content bg-base-100 rounded-box mt-4 w-52 p-2 shadow z-1"
+            className="menu gap-1 dropdown-content bg-base-100 rounded-box mt-4 w-52 p-2 z-1 shadow-md"
           >
             {navLinks}
           </ul>
@@ -73,20 +70,17 @@ const Navbar = () => {
             </button>
             <ul
               tabIndex="1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-2 shadow-md"
             >
               <button className="btn btn-accent">Logout</button>
             </ul>
           </div>
         ) : (
           <div className="w-fit flex items-center gap-2">
-            <Link
-              to="/login"
-              className="btn btn-outline border-2 border-base-200"
-            >
+            <Link to="/login" className="btn btn-primary btn-outline font-bold">
               Login
             </Link>
-            <Link to="/register" className="btn btn-accent font-bold">
+            <Link to="/register" className="btn btn-primary">
               Register
             </Link>
           </div>
