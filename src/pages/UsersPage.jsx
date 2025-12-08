@@ -79,7 +79,7 @@ const UsersPage = () => {
   const users = data.filter((user) => user._id !== loggedInUser._id);
 
   return (
-    <div className="p-6 bg-base-200 space-y-6">
+    <div className="space-y-6">
       <h2 className="text-4xl font-bold">Manage Users</h2>
 
       {selectedUser && (

@@ -38,41 +38,68 @@ const UserModal = ({ user, onClose }) => {
         </div>
 
         {/* Details Section */}
-        <div className="space-y-3 text-sm">
-          <p className="flex items-center gap-2">
-            <FaEnvelope className="text-primary" />
-            <span className="font-semibold">Email:</span>
-            <span className="opacity-80">{user.email}</span>
-          </p>
+        <div className="flex flex-col gap-4">
+          {/* Status */}
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span
+                className={`w-4 h-4 rounded-full ${
+                  user.status === "active" ? "bg-success" : "bg-error"
+                }`}
+              ></span>
+              <span className="font-semibold">Status:</span>
+            </div>
+            <span className="capitalize ml-6">{user.status}</span>
+          </div>
 
-          <p className="flex items-center gap-2">
-            <FaMapMarkerAlt className="text-primary" />
-            <span className="font-semibold">Address:</span>
-            <span className="opacity-80">{user.address}</span>
-          </p>
+          {/* Role */}
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <FaUserShield className="text-primary w-4" />
+              <span className="font-semibold">Role:</span>
+            </div>
+            <span className="capitalize ml-6">{user.role}</span>
+          </div>
 
-          <p className="flex items-center gap-2">
-            <FaUserShield className="text-primary" />
-            <span className="font-semibold">User ID:</span>
-            <span className="opacity-80">{user._id}</span>
-          </p>
+          {/* Email */}
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <FaEnvelope className="text-primary w-4" />
+              <span className="font-semibold">Email:</span>
+            </div>
+            <span className="ml-6">{user.email}</span>
+          </div>
 
-          <p className="flex items-center gap-2">
-            <FaCalendarAlt className="text-primary" />
-            <span className="font-semibold">Joined:</span>
-            <span className="opacity-80">
-              {new Date(user.createdAt).toLocaleDateString()}
-            </span>
-          </p>
+          {/* Address */}
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-primary w-4" />
+              <span className="font-semibold">Address:</span>
+            </div>
+            <span className="ml-6">{user.address}</span>
+          </div>
 
-          {/* If Chef → Show Chef ID */}
+          {/* Chef ID — only if user.role === "chef" */}
           {user.role === "chef" && (
-            <p className="flex items-center gap-2">
-              <FaUserShield className="text-primary" />
-              <span className="font-semibold">Chef ID:</span>
-              <span className="opacity-80">{user.chefId}</span>
-            </p>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <FaUserShield className="text-primary w-4" />
+                <span className="font-semibold">Chef ID:</span>
+              </div>
+              <span className="ml-6">{user._id}</span>
+            </div>
           )}
+
+          {/* Joined */}
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <FaCalendarAlt className="text-primary w-4" />
+              <span className="font-semibold">Joined:</span>
+            </div>
+            <span className="ml-6">
+              {new Date(user.createdAt).toLocaleString()}
+            </span>
+          </div>
         </div>
 
         {/* Actions */}

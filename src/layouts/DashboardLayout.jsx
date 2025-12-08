@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   return (
     <div className="drawer lg:drawer-open gap-2">
       <input id="drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content space-y-2">
+      <div className="drawer-content min-h-screen flex flex-col justify-between space-y-2">
         <nav className="navbar w-full bg-base-200 rounded-b-box p-2 gap-2">
           <label
             htmlFor="drawer"
@@ -20,7 +20,7 @@ const DashboardLayout = () => {
           </label>
           <Logo />
         </nav>
-        <div className="p-6 bg-base-200 rounded-box">
+        <div className="p-6 md:p-12 bg-base-200 rounded-box flex-1">
           <Outlet />
         </div>
         <Footer />

@@ -31,7 +31,8 @@ const RegisterPage = () => {
 
     try {
       const photoURL = await uploadImage(image[0]);
-      await registerUser(email, password);
+      const authResult = await registerUser(email, password);
+      const uid = authResult.user.uid;
       await updateUser({ displayName, photoURL });
       await axios.post("/users", {
         email,
@@ -39,6 +40,7 @@ const RegisterPage = () => {
         displayName,
         photoURL,
         role,
+        uid,
       });
       alert.success(
         "Registered!",

@@ -99,9 +99,9 @@ const Sidebar = () => {
         })}
 
         <li className="w-full">
-          <Logout className="btn btn-sm btn-warning">
+          <Logout className="btn is-drawer-close:btn-sm btn-warning">
             <div
-              className="is-drawer-close:tooltip is-drawer-close:tooltip-bottom"
+              className="is-drawer-close:tooltip is-drawer-close:tooltip-bottom flex items-center gap-2"
               data-tip="Logout"
             >
               <FaPowerOff className="text-xl" />
