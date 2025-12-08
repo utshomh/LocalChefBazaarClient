@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 
 // Routes
 import PrivateRoute from "./PrivateRoute";
-import AdminRoute from "./AdminRoute";
+import RoleBasedRoute from "./RoleBasedRoute";
 // Layouts
 import DefaultLayout from "../layouts/DefaultLayout";
 import RootLayout from "../layouts/RootLayout";
@@ -12,9 +12,11 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
+import UsersPage from "../pages/UsersPage";
+import RolesPage from "../pages/RolesPage";
+import NewMealPage from "../pages/NewMealPage";
 // Common
 import ErrorPage from "../pages/ErrorPage";
-import UsersPage from "../pages/UsersPage";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +45,20 @@ const router = createBrowserRouter([
           { path: "profile", element: <ProfilePage /> },
           {
             path: "admin/",
-            element: <AdminRoute />,
-            children: [{ path: "users", element: <UsersPage /> }],
+            element: <RoleBasedRoute role="admin" />,
+            children: [
+              { path: "users", element: <UsersPage /> },
+              { path: "roles", element: <RolesPage /> },
+            ],
+          },
+          {
+            path: "chef/",
+            element: <RoleBasedRoute role="chef" />,
+            children: [
+              { path: "new-meal", element: <NewMealPage /> },
+              // { path: "meals", element: null },
+              // { path: "orders", element: null },
+            ],
           },
         ],
       },

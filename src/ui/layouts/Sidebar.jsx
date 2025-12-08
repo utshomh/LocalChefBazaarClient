@@ -47,7 +47,7 @@ const navLinks = {
       name: "Manage Roles",
       icon: FaUserShield,
     },
-    { path: "/dashboard/admin/stats", name: "Manage Stats", icon: FaChartBar },
+    { path: "/dashboard/admin/stats", name: "Stats", icon: FaChartBar },
   ],
 };
 
@@ -59,7 +59,7 @@ const Sidebar = () => {
   if (isError) throw new Error(error.message);
 
   return (
-    <div className="py-2 min-h-full flex flex-col items-start bg-base-200 is-drawer-close:w-fit is-drawer-open:w-64 rounded-r-box">
+    <div className="py-2 min-h-full flex flex-col items-start bg-base-200 is-drawer-close:w-fit is-drawer-open:w-64 rounded-box rounded-b-none">
       <ul className="menu w-full grow items-center gap-2">
         <li className="w-full">
           <NavLink

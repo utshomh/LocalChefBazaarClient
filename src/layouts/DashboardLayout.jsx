@@ -10,7 +10,7 @@ const DashboardLayout = () => {
     <div className="drawer lg:drawer-open gap-2">
       <input id="drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content min-h-screen flex flex-col justify-between space-y-2">
-        <nav className="navbar w-full bg-base-200 rounded-b-box p-2 gap-2">
+        <nav className="navbar w-full bg-base-200 rounded-box p-2 gap-2">
           <label
             htmlFor="drawer"
             aria-label="Open Sidebar"

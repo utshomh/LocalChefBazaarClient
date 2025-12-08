@@ -27,10 +27,12 @@ const UsersPage = () => {
     setSelectedUser(users.find((user) => user._id === id));
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (user) => {
+    const { _id: id, displayName } = user;
+
     await alert.confirm(
       "Are you sure?",
-      "This action cannot be undone.",
+      `You are permanently deleting "${displayName}". This action cannot be undone.`,
       async () => {
         try {
           await axios.delete(`/users/${id}`);
@@ -46,30 +48,45 @@ const UsersPage = () => {
     );
   };
 
-  const handleMarkAsFraud = async (id) => {
-    try {
-      await axios.patch(`/users/${id}`, { status: "fraud" });
-      await refetch();
-      alert.success("Marked as Fraud!", "User has been marked as a Fraud.");
-    } catch (error) {
-      alert.error(
-        "Oops!",
-        error.message || "Something went wrong! Please try again."
-      );
-    }
+  const handleMarkAsFraud = async (user) => {
+    const { _id: id, displayName } = user;
+
+    await alert.confirm(
+      "Are you sure",
+      `You are about to mark "${displayName}" as a Fraud`,
+      async () => {
+        try {
+          await axios.patch(`/users/${id}`, { status: "fraud" });
+          await refetch();
+          alert.success("Marked as Fraud!", "User has been marked as a Fraud.");
+        } catch (error) {
+          alert.error(
+            "Oops!",
+            error.message || "Something went wrong! Please try again."
+          );
+        }
+      }
+    );
   };
 
-  const handleMarkAsActive = async (id) => {
-    try {
-      await axios.patch(`/users/${id}`, { status: "active" });
-      await refetch();
-      alert.success("Marked as Active!", "User has been marked as Active.");
-    } catch (error) {
-      alert.error(
-        "Oops!",
-        error.message || "Something went wrong! Please try again."
-      );
-    }
+  const handleMarkAsActive = async (user) => {
+    const { _id: id, displayName } = user;
+    await alert.confirm(
+      "Are you sure",
+      `You are about to mark "${displayName}" as Active`,
+      async () => {
+        try {
+          await axios.patch(`/users/${id}`, { status: "active" });
+          await refetch();
+          alert.success("Marked as Active!", "User has been marked as Active.");
+        } catch (error) {
+          alert.error(
+            "Oops!",
+            error.message || "Something went wrong! Please try again."
+          );
+        }
+      }
+    );
   };
 
   if (isLoading) return <Loader />;
@@ -91,13 +108,13 @@ const UsersPage = () => {
           {/* Head */}
           <thead>
             <tr>
-              <th className="">Index</th>
-              <th className="">Profile</th>
-              <th className="">Email</th>
-              <th className="">Address</th>
-              <th className="">Role</th>
-              <th className="">Status</th>
-              <th className="">Joined</th>
+              <th>Index</th>
+              <th>Profile</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Joined</th>
               <th className="text-center">Actions</th>
             </tr>
           </thead>
@@ -154,47 +171,45 @@ const UsersPage = () => {
                 </td>
 
                 {/* ACTION BUTTONS */}
-                <td className="">
-                  <div className="flex gap-2 justify-center">
-                    {/* View User */}
-                    <button
-                      className="btn btn-info btn-xs text-white tooltip"
-                      data-tip="View User"
-                      onClick={() => handleViewUser(user._id)}
-                    >
-                      <FaEye size={12} />
-                    </button>
+                <td className="flex gap-2 justify-center">
+                  {/* View User */}
+                  <button
+                    className="btn btn-info btn-xs text-white tooltip"
+                    data-tip="View User"
+                    onClick={() => handleViewUser(user._id)}
+                  >
+                    <FaEye size={12} />
+                  </button>
 
-                    {/* Mark as Fraud */}
-                    {user.status === "active" ? (
-                      <button
-                        className="btn btn-warning btn-xs text-white tooltip"
-                        data-tip="Mark as Fraud"
-                        disabled={isLoading}
-                        onClick={() => handleMarkAsFraud(user._id)}
-                      >
-                        <FaExclamationTriangle size={12} />
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-success btn-xs text-white tooltip"
-                        data-tip="Mark as Active"
-                        disabled={isLoading}
-                        onClick={() => handleMarkAsActive(user._id)}
-                      >
-                        <FaCheckCircle size={12} />
-                      </button>
-                    )}
-
-                    {/* Delete */}
+                  {/* Mark as Fraud */}
+                  {user.status === "active" ? (
                     <button
-                      className="btn btn-error btn-xs text-white tooltip"
-                      data-tip="Delete User"
-                      onClick={() => handleDelete(user._id)}
+                      className="btn btn-warning btn-xs text-white tooltip"
+                      data-tip="Mark as Fraud"
+                      disabled={isLoading}
+                      onClick={() => handleMarkAsFraud(user)}
                     >
-                      <FaTrash size={12} />
+                      <FaExclamationTriangle size={12} />
                     </button>
-                  </div>
+                  ) : (
+                    <button
+                      className="btn btn-success btn-xs text-white tooltip"
+                      data-tip="Mark as Active"
+                      disabled={isLoading}
+                      onClick={() => handleMarkAsActive(user)}
+                    >
+                      <FaCheckCircle size={12} />
+                    </button>
+                  )}
+
+                  {/* Delete */}
+                  <button
+                    className="btn btn-error btn-xs text-white tooltip"
+                    data-tip="Delete User"
+                    onClick={() => handleDelete(user)}
+                  >
+                    <FaTrash size={12} />
+                  </button>
                 </td>
               </tr>
             ))}

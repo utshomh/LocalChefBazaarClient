@@ -47,7 +47,7 @@ const RegisterPage = () => {
         "Your account has been created successfully."
       );
       reset();
-      navigate(state?.redirect || "/");
+      navigate(state?.redirect || "/dashboard/profile");
     } catch (error) {
       alert.error(
         "Oops!",

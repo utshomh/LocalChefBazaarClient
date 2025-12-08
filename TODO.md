@@ -121,8 +121,8 @@
 
 ## ADMIN DASHBOARD
 
-- 🔘 Manage users
-- 🔘 Manage role requests (chef/admin)
+- ✔️ Manage users
+- ✔️ Manage role requests (chef/admin)
 - 🔘 View platform stats
 
 ## BACKEND COLLECTIONS

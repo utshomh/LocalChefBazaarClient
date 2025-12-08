@@ -27,7 +27,7 @@ const LoginPage = () => {
       await loginUser(email, password);
       alert.success("Logged In!", "You’ve signed in successfully.");
       reset();
-      navigate(state?.redirect || "/");
+      navigate(state?.redirect || "/dashboard/profile");
     } catch (error) {
       alert.error(
         "Oops!",
