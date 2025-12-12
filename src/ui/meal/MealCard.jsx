@@ -1,16 +1,16 @@
 import { Link } from "react-router";
-import { FaClock, FaStar, FaUser } from "react-icons/fa";
+import { FaClock, FaHashtag, FaStar, FaUser } from "react-icons/fa";
 import { TbCoinTakaFilled } from "react-icons/tb";
 
 const MealCard = ({ meal }) => {
   return (
-    <div className="bg-base-300 max-w-md space-y-4 rounded-box p-6">
+    <div className="bg-base-300 max-w-md space-y-4 rounded-box p-4 md:p-6">
       {/* Image + Name */}
-      <div className="relative flex flex-col items-center space-y-2">
+      <div className="flex flex-col items-center space-y-2">
         <img
           src={meal.image}
           alt={meal.name}
-          className="rounded-box aspect-square w-full h-auto object-cover"
+          className="rounded-box aspect-square w-auto h-auto object-cover"
         />
 
         <h1 className="text-3xl font-bold text-center truncate max-w-2xs">
@@ -19,41 +19,36 @@ const MealCard = ({ meal }) => {
       </div>
 
       {/* Details */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         {/* Price */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <TbCoinTakaFilled className="text-primary w-4" />
-            <span className="font-semibold">Price:</span>
-          </div>
-          <span className="ml-6 font-bold">{meal.price}৳</span>
+        <div className="flex items-center gap-2">
+          <TbCoinTakaFilled className="text-primary w-4" />
+          <span className="font-semibold">Price: </span>
+          <span>{meal.price}৳</span>
         </div>
 
         {/* Estimated Time */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <FaClock className="text-primary w-4" />
-            <span className="font-semibold">Estimated Delivery Time:</span>
-          </div>
-          <span className="ml-6">{meal.estimatedDeliveryTime} minutes</span>
+        <div className="flex items-center gap-2">
+          <FaClock className="text-primary w-4" />
+          <span className="font-semibold">Est. Delivery Time: </span>
+          <span>{meal.estimatedDeliveryTime} minutes</span>
         </div>
 
         {/* Chef */}
-        <div className="space-y-1">
+        <div>
           <div className="flex items-center gap-2">
             <FaUser className="text-primary w-4" />
-            <span className="font-semibold">Chef:</span>
+            <span className="font-semibold">Chef: </span>
+            <span>{meal.chef.displayName}</span>
           </div>
-          <span className="ml-6">{meal.chef.displayName}</span>
+          <p className="ml-6">(# {meal.chef._id})</p>
         </div>
 
         {/* Ratings */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <FaStar className="text-primary w-4" />
-            <span className="font-semibold">Rating:</span>
-          </div>
-          <span className="ml-6">
+        <div className="flex items-center gap-2">
+          <FaStar className="text-primary w-4" />
+          <span className="font-semibold">Rating: </span>
+          <span>
             {meal.avgRating} ({meal.totalReviews} reviews)
           </span>
         </div>

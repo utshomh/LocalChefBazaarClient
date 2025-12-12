@@ -3,12 +3,12 @@ import { useForm, useWatch } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 
-import loginAnimation from "../assets/animations/login.json";
-import { uploadImage } from "../services/imgbb";
-import alert from "../utils/alert";
-import useAuth from "../hooks/useAuth";
-import useAxios from "../hooks/useAxios";
-import useToggle from "../hooks/useToggle";
+import loginAnimation from "../../assets/animations/login.json";
+import { uploadImage } from "../../services/imgbb";
+import alert from "../../utils/alert";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
+import useToggle from "../../hooks/useToggle";
 
 const RegisterPage = () => {
   const {

@@ -8,15 +8,21 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import RootLayout from "../layouts/RootLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 // Pages
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import ProfilePage from "../pages/ProfilePage";
-import UsersPage from "../pages/UsersPage";
-import RolesPage from "../pages/RolesPage";
-import NewMealPage from "../pages/NewMealPage";
-import MealsPage from "../pages/MealsPage";
-// Common
+import HomePage from "../pages/public/HomePage";
+import MealsPage from "../pages/public/MealsPage";
+// Private
+import ProfilePage from "../pages/private/ProfilePage";
+import MealDetailsPage from "../pages/private/MealDetailsPage";
+// Auth
+import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/RegisterPage";
+// Admin
+import UsersPage from "../pages/admin/UsersPage";
+import RolesPage from "../pages/admin/RolesPage";
+// Chef
+import NewMealPage from "../pages/chef/NewMealPage";
+import ManageMealsPage from "../pages/chef/MealsPage";
+// Error
 import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
@@ -30,6 +36,15 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           { path: "", element: <HomePage /> },
+          { path: "meals", element: <MealsPage /> },
+          {
+            path: "meals/:id",
+            element: (
+              <PrivateRoute>
+                <MealDetailsPage />
+              </PrivateRoute>
+            ),
+          },
           { path: "login", element: <LoginPage /> },
           { path: "register", element: <RegisterPage /> },
         ],
@@ -57,7 +72,7 @@ const router = createBrowserRouter([
             element: <RoleBasedRoute role="chef" />,
             children: [
               { path: "new-meal", element: <NewMealPage /> },
-              { path: "meals", element: <MealsPage /> },
+              { path: "meals", element: <ManageMealsPage /> },
               // { path: "orders", element: null },
             ],
           },

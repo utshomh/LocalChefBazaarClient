@@ -8,11 +8,11 @@ import {
   FaTrash,
 } from "react-icons/fa";
 
-import alert from "../utils/alert";
-import useUser from "../hooks/useUser";
-import useAxios from "../hooks/useAxios";
-import Loader from "../ui/shared/Loader";
-import UserModal from "../ui/user/UserModal";
+import alert from "../../utils/alert";
+import useUser from "../../hooks/useUser";
+import useAxios from "../../hooks/useAxios";
+import Loader from "../../ui/shared/Loader";
+import UserModal from "../../ui/user/UserModal";
 
 const UsersPage = () => {
   const { user: loggedInUser } = useUser();

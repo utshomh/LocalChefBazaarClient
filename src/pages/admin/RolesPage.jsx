@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaCheckCircle, FaCircle, FaEye, FaTrash } from "react-icons/fa";
 
-import alert from "../utils/alert";
-import useAxios from "../hooks/useAxios";
-import Loader from "../ui/shared/Loader";
-import UserModal from "../ui/user/UserModal";
+import alert from "../../utils/alert";
+import useAxios from "../../hooks/useAxios";
+import Loader from "../../ui/shared/Loader";
+import UserModal from "../../ui/user/UserModal";
 
 const RolesPage = () => {
   const axios = useAxios();

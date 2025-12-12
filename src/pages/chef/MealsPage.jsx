@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaPencilAlt, FaEye, FaTrash } from "react-icons/fa";
 
-import alert from "../utils/alert";
-import useAxios from "../hooks/useAxios";
-import Loader from "../ui/shared/Loader";
-import MealModal from "../ui/meal/MealModal";
-import UpdateMealModal from "../ui/meal/UpdateMealModal";
+import alert from "../../utils/alert";
+import useAxios from "../../hooks/useAxios";
+import Loader from "../../ui/shared/Loader";
+import MealModal from "../../ui/meal/MealModal";
+import UpdateMealModal from "../../ui/meal/UpdateMealModal";
 
 const MealsPage = () => {
   const axios = useAxios();

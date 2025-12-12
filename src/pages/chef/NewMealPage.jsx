@@ -1,12 +1,12 @@
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 
-import cookingAnimation from "../assets/animations/cooking.json";
-import { uploadImage } from "../services/imgbb";
-import alert from "../utils/alert";
-import useAxios from "../hooks/useAxios";
-import useUser from "../hooks/useUser";
-import Loader from "../ui/shared/Loader";
+import cookingAnimation from "../../assets/animations/cooking.json";
+import { uploadImage } from "../../services/imgbb";
+import alert from "../../utils/alert";
+import useAxios from "../../hooks/useAxios";
+import useUser from "../../hooks/useUser";
+import Loader from "../../ui/shared/Loader";
 
 const NewMealPage = () => {
   const axios = useAxios();

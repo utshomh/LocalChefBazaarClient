@@ -29,10 +29,10 @@
 
 ## MEALS PAGE
 
-- 🔘 Display all meals (cards)
-- 🔘 Show chef name + ID, image, price, rating, delivery area
-- 🔘 Add sort by price (ascending/descending)
-- 🔘 See Details → redirect to login if user not logged in
+- ✔️ Display all meals (cards)
+- ✔️ Show chef name + ID, image, price, rating, delivery area
+- ✔️ Add sort by price (ascending/descending)
+- ✔️ See Details → redirect to login if user not logged in
 
 ## AUTHENTICATION
 

@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 
-import loginAnimation from "../assets/animations/login.json";
-import alert from "../utils/alert";
-import useAuth from "../hooks/useAuth";
-import useToggle from "../hooks/useToggle";
+import loginAnimation from "../../assets/animations/login.json";
+import alert from "../../utils/alert";
+import useAuth from "../../hooks/useAuth";
+import useToggle from "../../hooks/useToggle";
 
 const LoginPage = () => {
   const {
