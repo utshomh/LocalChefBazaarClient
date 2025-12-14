@@ -9,33 +9,56 @@ import { TbCoinTakaFilled } from "react-icons/tb";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
+import alert from "../../utils/alert";
 import useAxios from "../../hooks/useAxios";
+import useUser from "../../hooks/useUser";
 import Loader from "../../ui/shared/Loader";
 import MealReviews from "../../ui/review/MealReviews";
 import AddReviewForm from "../../ui/review/AddReview";
 
 const MealDetailsPage = () => {
   const { id } = useParams();
+  const { user, isLoading: userIsLoading } = useUser();
   const axios = useAxios();
-  const {
-    data: meal,
-    error,
-    isError,
-    isLoading,
-  } = useQuery({
+  const { data, error, refetch, isError, isLoading } = useQuery({
     queryKey: ["get-meal", id],
-    queryFn: () => axios.get(`/meals/${id}`).then((res) => res.data),
+    queryFn: async () => {
+      const meal = await axios.get(`/meals/${id}`).then((res) => res.data);
+      const favorite = await axios
+        .get(`/favorites?meal=${meal._id}&user=${user._id}`)
+        .then((res) => res.data);
+      const isFavorite = favorite.length > 0;
+      return [meal, isFavorite];
+    },
   });
 
-  const handleAddToFavorite = async (id) => {
-    console.log(id);
+  const handleAddToFavorite = async (meal) => {
+    await alert.confirm(
+      "Are you sure?",
+      `You are about to mark "${meal.name}" as a Favorite Meal!`,
+      async () => {
+        try {
+          await axios.post(`/favorites`, { user: user._id, meal: meal._id });
+          alert.success(
+            "Marked as Favorite!",
+            "Meal has been marked as Active."
+          );
+          await refetch();
+        } catch (error) {
+          alert.error(
+            "Oops!",
+            error.message || "Something went wrong! Please try again."
+          );
+        }
+      }
+    );
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading || userIsLoading) return <Loader />;
 
   if (isError) throw new Error(error.message);
 
-  console.log(meal.avgRating);
+  const [meal, isFavorite] = data;
 
   return (
     <div className="p-6 bg-base-200 rounded-box space-y-6">
@@ -49,10 +72,14 @@ const MealDetailsPage = () => {
             className="rounded-box w-full aspect-square object-cover"
           />
           <button
-            className="btn btn-primary"
-            onClick={() => handleAddToFavorite(meal._id)}
+            className={`btn ${
+              isFavorite
+                ? "btn-disabled pointer-events-none cursor-not-allowed"
+                : "btn-primary cursor-pointer"
+            }`}
+            onClick={() => !isFavorite && handleAddToFavorite(meal)}
           >
-            Add to Favorite
+            {isFavorite ? "Added to Favorite" : "Add to Favorite"}
           </button>
         </div>
 

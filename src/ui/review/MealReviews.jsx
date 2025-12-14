@@ -25,8 +25,6 @@ const MealReviews = ({ meal }) => {
     return <p className="opacity-75 font-bold text-xl">No reviews yet.</p>;
   }
 
-  console.log(reviews);
-
   return (
     <div className="space-y-4">
       {reviews.map((review) => (
