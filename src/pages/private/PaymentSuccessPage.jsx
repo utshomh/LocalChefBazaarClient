@@ -49,11 +49,13 @@ const PaymentSuccessPage = () => {
       </div>
 
       {/* Image */}
-      <img
-        src={order.meal.image}
-        alt=""
-        className="aspect-video w-full h-auto rounded-box"
-      />
+      <div className="aspect-video w-full h-auto">
+        <img
+          src={order.meal.image}
+          alt={order.meal.name}
+          className="aspect-video w-full h-auto object-cover rounded-box"
+        />
+      </div>
 
       {/* Tracking ID */}
       <div className="space-y-1">
@@ -109,7 +111,7 @@ const PaymentSuccessPage = () => {
         </div>
       </div>
 
-      <Link to="/user/orders" className="btn btn-primary">
+      <Link to="/dashboard/user/orders" className="btn btn-primary">
         Go to My Orders
       </Link>
     </div>

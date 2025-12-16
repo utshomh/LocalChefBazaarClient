@@ -19,12 +19,25 @@ const ReviewModal = ({ review, onClose }) => {
         </div>
 
         {/* Meal */}
-        <div className="space-y-1">
+        <div className="space-y-2">
           <div className="flex items-center gap-2">
             <FaUtensils className="text-primary" />
-            <span className="font-semibold">Meal ID:</span>
+            <span className="font-semibold">Meal</span>
           </div>
-          <p className="ml-6 text-sm text-base-content/75">{review.meal}</p>
+
+          <div className="ml-6 flex items-center gap-3">
+            <div className="avatar">
+              <div className="mask mask-rounded w-12 h-12 rounded-box">
+                <img src={review.meal.image} alt={review.meal.name} />
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold">{review.meal.name}</div>
+              <div className="text-xs opacity-50 truncate max-w-[140px]">
+                {review.meal._id}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Date */}

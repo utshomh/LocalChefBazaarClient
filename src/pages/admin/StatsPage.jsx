@@ -17,8 +17,6 @@ import {
 import useAxios from "../../hooks/useAxios";
 import Loader from "../../ui/shared/Loader";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
 const StatsPage = () => {
   const axios = useAxios();
 
@@ -36,6 +34,7 @@ const StatsPage = () => {
     totalChefs,
     totalMeals,
     totalOrders,
+    paidOrders,
     totalReviews,
     pendingOrders,
     deliveredOrders,
@@ -47,9 +46,10 @@ const StatsPage = () => {
   /* ---------- Chart Data ---------- */
 
   const ordersStatusData = [
-    { name: "pending", value: pendingOrders },
-    { name: "delivered", value: deliveredOrders },
-    { name: "cancelled", value: cancelledOrders },
+    { name: "paid", value: paidOrders, color: "#0088FE" },
+    { name: "pending", value: pendingOrders, color: "#FFBB28" },
+    { name: "delivered", value: deliveredOrders, color: "#00C49F" },
+    { name: "cancelled", value: cancelledOrders, color: "#FF4D4F" },
   ];
 
   const totalsData = [
@@ -87,7 +87,7 @@ const StatsPage = () => {
             <PieChart>
               <Pie data={ordersStatusData} dataKey="value" label>
                 {ordersStatusData.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                  <Cell key={i} fill={ordersStatusData[i].color} />
                 ))}
               </Pie>
               <Tooltip />
@@ -103,12 +103,61 @@ const StatsPage = () => {
           </h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={ordersLast7Days}>
-              <XAxis dataKey="_id" />
-              <YAxis />
-              <Tooltip />
+              <XAxis
+                dataKey="_id"
+                tickFormatter={(value) =>
+                  new Date(value).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                  })
+                }
+              />
+
+              {/* Orders axis (LEFT) */}
+              <YAxis
+                yAxisId="orders"
+                allowDecimals={false}
+                label={{ value: "Orders", angle: -90, position: "insideLeft" }}
+              />
+
+              {/* Revenue axis (RIGHT) */}
+              <YAxis
+                yAxisId="revenue"
+                orientation="right"
+                label={{
+                  value: "Revenue (৳)",
+                  angle: -90,
+                  position: "insideRight",
+                }}
+              />
+
+              <Tooltip
+                formatter={(value, name) =>
+                  name === "revenue"
+                    ? [`৳${value}`, "Revenue"]
+                    : [value, "Orders"]
+                }
+              />
+
               <Legend />
-              <Line type="monotone" dataKey="orders" stroke="#0088FE" />
-              <Line type="monotone" dataKey="revenue" stroke="#00C49F" />
+
+              <Line
+                yAxisId="orders"
+                type="monotone"
+                dataKey="orders"
+                stroke="#0088FE"
+                strokeWidth={2}
+                dot={{ r: 4 }}
+              />
+
+              <Line
+                yAxisId="revenue"
+                type="monotone"
+                dataKey="revenue"
+                stroke="#00C49F"
+                strokeWidth={2}
+                dot={{ r: 4 }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>

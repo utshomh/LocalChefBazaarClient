@@ -70,7 +70,7 @@ const ReviewsPage = () => {
               <th>Index</th>
               <th>Rating</th>
               <th>Comment</th>
-              <th>Meal ID</th>
+              <th>Meal</th>
               <th>Reviewed On</th>
               <th className="text-center">Actions</th>
             </tr>
@@ -94,7 +94,16 @@ const ReviewsPage = () => {
                 <td className="max-w-xs truncate">{review.comment}</td>
 
                 {/* Meal */}
-                <td className="truncate max-w-[140px]">{review.meal}</td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div>
+                      <div className="font-semibold">{review.meal.name}</div>
+                      <div className="text-xs opacity-50 truncate max-w-[140px]">
+                        {review.meal._id}
+                      </div>
+                    </div>
+                  </div>
+                </td>
 
                 {/* Date */}
                 <td>{new Date(review.createdAt).toLocaleDateString()}</td>
