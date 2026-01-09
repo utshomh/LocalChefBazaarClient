@@ -25,36 +25,36 @@ const Reviews = () => {
   if (isError) throw new Error(error.message);
 
   return (
-    <div className="py-10 space-y-6">
+    <div className="py-10 space-y-6 overflow-hidden">
       <h2 className="text-3xl font-bold border-l-4 pl-4 border-accent">
         Reviews
       </h2>
-
       <Swiper
         spaceBetween={20}
         loop={true}
-        centeredSlides={true} // Centers the active card
-        autoplay={{ delay: 3000 }}
+        centeredSlides={true}
+        grabCursor={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         pagination={{ clickable: true }}
         modules={[Pagination, Autoplay]}
-        // Default (Mobile)
         slidesPerView={1.2}
         breakpoints={{
-          // Tablet
           640: {
             slidesPerView: 2,
-            centeredSlides: false, // Usually looks better left-aligned on tablet
           },
-          // Desktop
+          768: {
+            slidesPerView: 2.5,
+          },
           1024: {
             slidesPerView: 3,
-            centeredSlides: false,
           },
         }}
-        className="pb-12"
       >
-        {reviews.map((review, index) => (
-          <SwiperSlide key={index}>
+        {reviews?.map((review, index) => (
+          <SwiperSlide key={index} className="flex h-auto">
             <ReviewCard review={review} />
           </SwiperSlide>
         ))}
