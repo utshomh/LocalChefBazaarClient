@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 import useAxios from "../../hooks/useAxios";
@@ -14,51 +13,45 @@ const Reviews = () => {
   const axios = useAxios();
   const {
     data: reviews,
-    error,
-    isError,
     isLoading,
+    isError,
+    error,
   } = useQuery({
     queryKey: ["get-reviews"],
-    queryFn: () =>
-      axios
-        .get("/reviews?limit=6&sort=rating&order=desc")
-        .then((res) => res.data),
+    queryFn: () => axios.get("/reviews?limit=6").then((res) => res.data),
   });
 
   if (isLoading) return <Loader />;
   if (isError) throw new Error(error.message);
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <h2 className="border-l-4 pl-4 rounded-box border-accent text-4xl font-bold">
-          Reviews
-        </h2>
-        <p className="text-base-content/75">
-          Read what our Customers got to say about us.
-        </p>
-      </div>
+    <div className="py-10 space-y-6">
+      <h2 className="text-3xl font-bold border-l-4 pl-4 border-accent">
+        Reviews
+      </h2>
 
       <Swiper
-        effect="coverflow"
-        coverflowEffect={{
-          rotate: 30,
-          stretch: "50%",
-          depth: 200,
-          modifier: 1,
-          scale: 0.75,
-          slideShadows: true,
-        }}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={2}
-        pagination={true}
+        spaceBetween={20}
         loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
+        centeredSlides={true} // Centers the active card
+        autoplay={{ delay: 3000 }}
+        pagination={{ clickable: true }}
+        modules={[Pagination, Autoplay]}
+        // Default (Mobile)
+        slidesPerView={1.2}
+        breakpoints={{
+          // Tablet
+          640: {
+            slidesPerView: 2,
+            centeredSlides: false, // Usually looks better left-aligned on tablet
+          },
+          // Desktop
+          1024: {
+            slidesPerView: 3,
+            centeredSlides: false,
+          },
         }}
-        modules={[EffectCoverflow, Pagination, Autoplay]}
+        className="pb-12"
       >
         {reviews.map((review, index) => (
           <SwiperSlide key={index}>
