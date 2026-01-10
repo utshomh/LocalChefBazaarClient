@@ -8,33 +8,33 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="relative p-6 md:py-12 flex items-center justify-center bg-neutral text-neutral-content rounded-box">
+    <div className="group relative p-6 md:py-12 flex items-center justify-center bg-neutral text-neutral-content rounded-box overflow-hidden">
       <div className="absolute inset-0 overflow-hidden rounded-box">
-        <div className="absolute inset-0 bg-linear-to-b from-black/15 to-black/50"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/15 to-black/50 z-10"></div>
         <img
           src={pizzaImage}
           alt="Pizza"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-110"
         />
       </div>
 
       <form
-        className="flex flex-col items-center gap-6 z-1"
+        className="flex flex-col items-center gap-6 z-20 relative"
         onSubmit={handleSubscription}
       >
-        <h2 className="text-center text-3xl font-bold">
+        <h2 className="text-center text-3xl font-bold drop-shadow-md">
           Subscribe to our Newsletter for
           <br />
           Fresh Menu Drops and Delicious Offers
         </h2>
-        <div className="relative w-full">
+        <div className="relative w-full transition-all duration-300 focus-within:scale-105">
           <input
             type="email"
-            className="input input-lg px-6 w-full rounded-full text-base-content text-base"
+            className="input input-lg px-6 w-full rounded-full text-base-content text-base shadow-lg"
             required
             placeholder="Enter Your Email"
           />
-          <button className="absolute top-0 right-1 translate-y-1 btn btn-primary rounded-full z-2">
+          <button className="absolute top-0 right-1 translate-y-1 btn btn-primary rounded-full z-2 hover:scale-105 transition-transform">
             Subscribe
           </button>
         </div>

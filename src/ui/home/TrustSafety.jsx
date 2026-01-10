@@ -29,9 +29,11 @@ const TrustSafety = () => {
         {trustItems.map((item, i) => (
           <div
             key={i}
-            className="flex-1 flex gap-4 items-start p-6 bg-base-100 rounded-lg shadow-md hover:shadow-xl transition"
+            className="group flex-1 flex gap-4 items-start p-6 bg-base-100 rounded-lg shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out cursor-default"
           >
-            <div className="text-success mt-1">{item.icon}</div>
+            <div className="text-success mt-1 group-hover:scale-110 transition-transform duration-300">
+              {item.icon}
+            </div>
             <div>
               <h3 className="font-semibold">{item.title}</h3>
               <p className="text-base-content/70">{item.desc}</p>

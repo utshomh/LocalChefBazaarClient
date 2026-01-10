@@ -25,9 +25,11 @@ const Navbar = () => {
       <NavLink
         to={link.path}
         className={({ isActive }) =>
-          `px-4 font-semibold ${
-            isActive ? "bg-accent/50" : "bg-inherit"
-          } rounded-full hover:bg-accent/30`
+          `px-4 py-2 font-semibold transition-all duration-300 transform hover:scale-105 ${
+            isActive
+              ? "bg-accent text-accent-content shadow-md"
+              : "bg-transparent hover:bg-accent/20"
+          } rounded-full`
         }
       >
         {link.label}
@@ -36,19 +38,19 @@ const Navbar = () => {
   ));
 
   return (
-    <div className="sticky top-0 z-50 bg-base-100 navbar px-0 md:px-4 rounded-b-box hover:shadow-xs transition-shadow">
+    <div className="sticky top-0 z-50 bg-base-100/80 backdrop-blur-md navbar px-0 md:px-4 rounded-b-box hover:shadow-md transition-all duration-300">
       <div className="navbar-start gap-1">
         <div className="dropdown">
           <div
             tabIndex="0"
             role="button"
-            className="btn btn-ghost p-2 md:hidden"
+            className="btn btn-ghost p-2 md:hidden hover:bg-accent/20 transition-colors"
           >
             <MdMenu className="text-2xl" />
           </div>
           <ul
             tabIndex="0"
-            className="menu gap-1 dropdown-content bg-base-100 rounded-box mt-4 w-52 p-2 z-1 shadow-md"
+            className="menu gap-2 dropdown-content bg-base-100 rounded-box mt-4 w-52 p-2 z-1 shadow-2xl border border-base-300"
           >
             {navLinks}
           </ul>
@@ -56,22 +58,27 @@ const Navbar = () => {
 
         <Logo />
       </div>
+
       <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1 gap-1">{navLinks}</ul>
+        <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
       </div>
-      <div className="navbar-end">
+
+      <div className="navbar-end gap-2">
+        <ThemeToggle />
         {user ? (
-          <div className="w-fit flex items-center gap-2">
-            <ThemeToggle />
-            <UserDropdown user={user} />
-          </div>
+          <UserDropdown user={user} />
         ) : (
-          <div className="w-fit flex items-center gap-2">
-            <ThemeToggle />
-            <Link to="/login" className="btn btn-primary btn-outline font-bold">
+          <div className="flex items-center gap-2">
+            <Link
+              to="/login"
+              className="btn btn-primary btn-outline font-bold hover:scale-105 active:scale-95 transition-all"
+            >
               Login
             </Link>
-            <Link to="/register" className="btn btn-primary">
+            <Link
+              to="/register"
+              className="btn btn-primary shadow-lg hover:shadow-primary/30 hover:scale-105 active:scale-95 transition-all"
+            >
               Register
             </Link>
           </div>

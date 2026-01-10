@@ -24,7 +24,7 @@ const FAQ = () => {
         {faqs.map((item, i) => (
           <div
             key={i}
-            className="collapse collapse-arrow border border-base-300 rounded-lg bg-base-200"
+            className="collapse collapse-arrow border border-base-300 rounded-lg bg-base-200 hover:bg-base-300 hover:translate-x-1 transition-all duration-300"
           >
             <input type="checkbox" />
             <div className="collapse-title font-semibold text-lg">{item.q}</div>
