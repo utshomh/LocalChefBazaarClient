@@ -10,19 +10,21 @@ const DashboardLayout = () => {
     <div className="drawer lg:drawer-open gap-2">
       <input id="drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content min-h-screen flex flex-col justify-between space-y-2">
-        <nav className="navbar w-full bg-base-200 rounded-box p-2 gap-2">
+        <nav className="navbar w-full bg-base-200 rounded-box p-2 gap-2 hover:shadow-sm transition-shadow duration-300">
           <label
             htmlFor="drawer"
             aria-label="Open Sidebar"
-            className="btn btn-square btn-ghost"
+            className="btn btn-square btn-ghost transition-colors"
           >
             <MdMenu className="text-2xl" />
           </label>
           <Logo />
         </nav>
-        <div className="p-6 md:p-12 bg-base-200 rounded-box flex-1 w-full">
+
+        <div className="p-6 md:p-12 bg-base-200 rounded-box flex-1 w-full animate-in fade-in duration-500">
           <Outlet />
         </div>
+
         <Footer />
       </div>
 

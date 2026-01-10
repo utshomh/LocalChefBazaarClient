@@ -22,11 +22,7 @@ const navLinks = {
   user: [
     { path: "/dashboard/user/orders", name: "My Orders", icon: FaBox },
     { path: "/dashboard/user/reviews", name: "My Reviews", icon: FaStar },
-    {
-      path: "/dashboard/user/favorites",
-      name: "My Favorite Meals",
-      icon: FaHeart,
-    },
+    { path: "/dashboard/user/favorites", name: "My Favorites", icon: FaHeart },
   ],
   chef: [
     {
@@ -56,45 +52,55 @@ const Sidebar = () => {
   const { user, error, isError, isLoading } = useUser();
 
   if (isLoading) return <Loader />;
-
   if (isError) throw new Error(error.message);
 
   return (
-    <div className="py-2 min-h-full flex flex-col items-start bg-base-200 is-drawer-close:w-fit is-drawer-open:w-64 rounded-box rounded-b-none">
-      <ul className="menu w-full grow items-center gap-2">
-        <li className="w-full flex items-center justify-center">
+    /* FIXED: Added w-64 for open state and transition-width */
+    <div
+      className="py-2 min-h-full flex flex-col items-start bg-base-200 transition-all duration-300 shadow-xl border-r border-base-300
+      is-drawer-close:w-20 is-drawer-open:w-64 w-64 lg:w-72 rounded-box rounded-b-none"
+    >
+      <ul className="menu w-full grow items-center gap-2 px-2">
+        <li className="w-full flex items-center justify-center py-2">
           <ThemeToggle />
         </li>
 
-        <li className="w-full">
+        {/* Profile Link */}
+        <li
+          className="w-full group is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Profile"
+        >
           <NavLink
             to="/dashboard/profile"
             className={({ isActive }) =>
-              `is-drawer-close:tooltip is-drawer-close:tooltip-right items-center ${
+              `flex items-center gap-4 px-4 py-3 font-semibold transition-all duration-300 ${
                 isActive ? "bg-accent/50" : "bg-inherit"
-              }`
+              } hover:bg-accent/30 hover:translate-x-1`
             }
-            data-tip="Homepage"
           >
-            <FaUser className="text-xl" />
+            <FaUser className="text-xl transition-transform group-hover:scale-110" />
             <span className="is-drawer-close:hidden font-bold">Profile</span>
           </NavLink>
         </li>
 
+        {/* Dynamic Links */}
         {navLinks[user.role].map((link, i) => {
           const Icon = link.icon;
           return (
-            <li key={i} className="w-full">
+            <li
+              key={i}
+              className="w-full group is-drawer-close:tooltip is-drawer-close:tooltip-right"
+              data-tip={link.name}
+            >
               <NavLink
                 to={link.path}
                 className={({ isActive }) =>
-                  `is-drawer-close:tooltip is-drawer-close:tooltip-right items-center ${
+                  `flex items-center gap-4 px-4 py-3 font-semibold transition-all duration-300 ${
                     isActive ? "bg-accent/50" : "bg-inherit"
-                  } hover:bg-accent/25`
+                  } hover:bg-accent/25 hover:translate-x-1`
                 }
-                data-tip={link.name}
               >
-                <Icon className="text-xl" />
+                <Icon className="text-xl transition-transform group-hover:scale-110" />
                 <span className="is-drawer-close:hidden font-bold">
                   {link.name}
                 </span>
@@ -103,16 +109,13 @@ const Sidebar = () => {
           );
         })}
 
-        <li className="w-full">
-          <Logout className="btn is-drawer-close:btn-sm btn-warning">
-            <div
-              className="is-drawer-close:tooltip is-drawer-close:tooltip-bottom flex items-center gap-2"
-              data-tip="Logout"
-            >
-              <FaPowerOff className="text-xl" />
-
-              <span className="is-drawer-close:hidden font-bold">Logout</span>
-            </div>
+        <li
+          className="w-full group is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Logout"
+        >
+          <Logout className="btn btn-warning w-full flex items-center gap-2 transition-all active:scale-95">
+            <FaPowerOff className="text-xl transition-transform group-hover:rotate-12" />
+            <span className="is-drawer-close:hidden font-bold">Logout</span>
           </Logout>
         </li>
       </ul>
