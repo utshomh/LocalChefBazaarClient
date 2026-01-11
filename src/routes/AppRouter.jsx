@@ -8,9 +8,12 @@ import RoleBasedRoute from "./RoleBasedRoute";
 const DefaultLayout = lazy(() => import("../layouts/DefaultLayout"));
 const RootLayout = lazy(() => import("../layouts/RootLayout"));
 const DashboardLayout = lazy(() => import("../layouts/DashboardLayout"));
-// Pages
+// Public
 const HomePage = lazy(() => import("../pages/public/HomePage"));
 const MealsPage = lazy(() => import("../pages/public/MealsPage"));
+const AboutPage = lazy(() => import("../pages/public/AboutPage"));
+const TermsPage = lazy(() => import("../pages/public/TermsPage"));
+const SupportPage = lazy(() => import("../pages/public/SupportPage"));
 // Private
 const ProfilePage = lazy(() => import("../pages/private/ProfilePage"));
 const OrderPage = lazy(() => import("../pages/private/OrderPage"));
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
         children: [
           { path: "", element: <HomePage /> },
           { path: "meals", element: <MealsPage /> },
+          { path: "about", element: <AboutPage /> },
+          { path: "terms", element: <TermsPage /> },
+          { path: "support", element: <SupportPage /> },
+
           {
             path: "meals/:id",
             element: (
