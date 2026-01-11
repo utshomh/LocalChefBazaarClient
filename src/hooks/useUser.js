@@ -11,6 +11,7 @@ const useUser = () => {
     error,
     isError,
     isLoading,
+    refetch,
   } = useQuery({
     queryKey: ["get-user-by-email", user.email],
     queryFn: () =>
@@ -25,6 +26,7 @@ const useUser = () => {
   return {
     user: userFromDB,
     isLoading,
+    refetch,
   };
 };
 
