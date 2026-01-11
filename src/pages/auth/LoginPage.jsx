@@ -8,6 +8,17 @@ import alert from "../../utils/alert";
 import useAuth from "../../hooks/useAuth";
 import useToggle from "../../hooks/useToggle";
 
+const DEMO_ACCOUNTS = {
+  user: {
+    email: "demo.user@demo.com",
+    password: "User@123",
+  },
+  chef: {
+    email: "demo.chef@demo.com",
+    password: "Chef@123",
+  },
+};
+
 const LoginPage = () => {
   const {
     register,
@@ -15,6 +26,7 @@ const LoginPage = () => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
+
   const { loginUser } = useAuth();
   const { value: showPassword, toggle: toggleShowPassword } = useToggle();
 
@@ -23,6 +35,7 @@ const LoginPage = () => {
 
   const handleLogin = async (data) => {
     const { email, password } = data;
+
     try {
       await loginUser(email, password);
       alert.success("Logged In!", "You’ve signed in successfully.");
@@ -32,6 +45,21 @@ const LoginPage = () => {
       alert.error(
         "Oops!",
         error.message || "Something went wrong! Please try again."
+      );
+    }
+  };
+
+  const handleDemoLogin = async (role) => {
+    const { email, password } = DEMO_ACCOUNTS[role];
+
+    try {
+      await loginUser(email, password);
+      alert.success("Demo Login", `Logged in as Demo ${role.toUpperCase()}`);
+      navigate("/dashboard/profile");
+    } catch (error) {
+      alert.error(
+        "Demo Failed",
+        error.message || "Demo login failed. The demo rebelled."
       );
     }
   };
@@ -61,6 +89,7 @@ const LoginPage = () => {
                 </p>
               )}
             </div>
+
             {/* Password */}
             <div className="space-y-1">
               <label className="text-base font-semibold">Password:</label>
@@ -102,6 +131,28 @@ const LoginPage = () => {
             </Link>
           </p>
 
+          {/* Demo Buttons */}
+          <div className="divider text-sm opacity-70">OR TRY A DEMO</div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button
+              type="button"
+              className="btn btn-outline btn-info"
+              onClick={() => handleDemoLogin("user")}
+            >
+              Demo User
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-outline btn-warning"
+              onClick={() => handleDemoLogin("chef")}
+            >
+              Demo Chef
+            </button>
+          </div>
+
+          {/* Login Button */}
           <button
             type="submit"
             className={`btn gap-2 w-full ${
@@ -118,7 +169,7 @@ const LoginPage = () => {
 
         <Lottie
           animationData={loginAnimation}
-          loop={true}
+          loop
           className="w-full hidden md:block"
         />
       </div>

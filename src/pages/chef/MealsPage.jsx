@@ -7,9 +7,11 @@ import useAxios from "../../hooks/useAxios";
 import Loader from "../../ui/shared/Loader";
 import MealModal from "../../ui/meal/MealModal";
 import UpdateMealModal from "../../ui/meal/UpdateMealModal";
+import useUser from "../../hooks/useUser";
 
 const MealsPage = () => {
   const axios = useAxios();
+  const { isLoading: userIsLoading, user } = useUser();
 
   const {
     data: meals,
@@ -20,7 +22,9 @@ const MealsPage = () => {
   } = useQuery({
     queryKey: ["get-all-meals"],
     queryFn: () =>
-      axios.get("/meals?sort=createdAt&order=desc").then((res) => res.data),
+      axios
+        .get(`/meals?sort=createdAt&order=desc&chef=${user._id}`)
+        .then((res) => res.data),
   });
 
   const [selectedMeal, setSelectedMeal] = useState(null);
@@ -47,7 +51,7 @@ const MealsPage = () => {
     );
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading || userIsLoading) return <Loader />;
 
   if (isError) throw new Error(error.message);
 
