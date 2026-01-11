@@ -75,20 +75,23 @@ const Navbar = () => {
           ))}
 
           {/* "More" Dropdown for Secondary Links */}
-          <li className="dropdown dropdown-hover dropdown-end">
-            <div
-              tabIndex="2"
-              role="button"
-              className="px-4 py-2 font-semibold hover:bg-accent/20 rounded-full flex items-center gap-1 transition-all"
+          <li className="dropdown dropdown-end">
+            <button
+              tabIndex={0}
+              className="px-4 py-2 font-semibold hover:bg-accent/20 rounded-full flex items-center gap-1 transition-all active:scale-95"
             >
-              More <FaChevronDown className="text-xs" />
-            </div>
+              More
+              <FaChevronDown className="text-xs transition-transform" />
+            </button>
+
             <ul
-              tabIndex="2"
-              className="dropdown-content z-1 menu p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-200 mt-4 gap-2"
+              tabIndex={0}
+              className="dropdown-content menu menu-sm bg-base-100 rounded-box z-50 mt-4 w-52 p-2 shadow-2xl border border-base-300 gap-2 animate-in fade-in slide-in-from-top-2 duration-200"
             >
               {secondaryLinks.map((link, index) => (
-                <li key={index}>{renderNavLink(link)}</li>
+                <li key={index} onClick={() => document.activeElement.blur()}>
+                  {renderNavLink(link)}
+                </li>
               ))}
             </ul>
           </li>
